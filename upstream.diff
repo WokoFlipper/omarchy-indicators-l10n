@@ -1,0 +1,89 @@
+--- Indicators.qml
++++ Indicators.qml
+@@ -431,7 +431,7 @@
+       id: indicatorSource
+ 
+       anchors.fill: parent
+-      source: indicatorSlot.indicatorId ? Qt.resolvedUrl("../indicators/" + indicatorSlot.indicatorId + ".qml") : ""
++      source: indicatorSlot.indicatorId ? Qt.resolvedUrl("indicators/" + indicatorSlot.indicatorId + ".qml") : ""
+       onLoaded: {
+         indicatorSlot.injectProps()
+         indicatorSlot.syncActiveState()
+--- indicators/Dnd.qml
++++ indicators/Dnd.qml
+@@ -11,8 +11,11 @@
+   active: dnd
+   activeText: "󰂛"
+   inactiveText: "󰂛"
+-  activeTooltipText: "Allow Notifications"
+-  inactiveTooltipText: "Silence Notifications"
++  // Strings come from ~/.config/omarchy/locales/<language>.json.
++  Translations { id: i18n }
++
++  activeTooltipText: i18n.t("Allow Notifications")
++  inactiveTooltipText: i18n.t("Silence Notifications")
+ 
+   onPressed: function() {
+     if (root.notificationService) {
+--- indicators/NightLight.qml
++++ indicators/NightLight.qml
+@@ -9,8 +9,11 @@
+   active: nightlightService ? nightlightService.enabled : false
+   activeText: "󰔎"
+   inactiveText: "󰔎"
+-  activeTooltipText: "Day Light"
+-  inactiveTooltipText: "Night Light"
++  // Strings come from ~/.config/omarchy/locales/<language>.json.
++  Translations { id: i18n }
++
++  activeTooltipText: i18n.t("Day Light")
++  inactiveTooltipText: i18n.t("Night Light")
+ 
+   function toggle() {
+     if (root.nightlightService) root.nightlightService.setNightlight(!root.active)
+--- indicators/ScreenRecording.qml
++++ indicators/ScreenRecording.qml
+@@ -10,8 +10,11 @@
+   active: recording
+   activeText: "󰻂"
+   inactiveText: "󰻂"
+-  activeTooltipText: "Stop recording"
+-  inactiveTooltipText: "Screen Recording"
++  // Strings come from ~/.config/omarchy/locales/<language>.json.
++  Translations { id: i18n }
++
++  activeTooltipText: i18n.t("Stop recording")
++  inactiveTooltipText: i18n.t("Screen Recording")
+ 
+   function refresh() {
+     if (!root.bar || statusProc.running) return
+--- indicators/StayAwake.qml
++++ indicators/StayAwake.qml
+@@ -9,8 +9,11 @@
+   active: idleService ? idleService.stayAwake : false
+   activeText: "󰅶"
+   inactiveText: "󰅶"
+-  activeTooltipText: "Allow Idle Lock & Screensaver"
+-  inactiveTooltipText: "Stay Awake"
++  // Strings come from ~/.config/omarchy/locales/<language>.json.
++  Translations { id: i18n }
++
++  activeTooltipText: i18n.t("Allow Idle Lock & Screensaver")
++  inactiveTooltipText: i18n.t("Stay Awake")
+ 
+   function toggle() {
+     if (root.idleService) root.idleService.setIdleEnabled(root.active)
+--- indicators/Dictation.qml
++++ indicators/Dictation.qml
+@@ -12,7 +12,10 @@
+   activeText: icon
+   inactiveText: "󰍬"
+   activeTooltipText: state
+-  inactiveTooltipText: "Dictate"
++  // Strings come from ~/.config/omarchy/locales/<language>.json.
++  Translations { id: i18n }
++
++  inactiveTooltipText: i18n.t("Dictate")
+ 
+   function update(raw) {
+     var data = extractData(raw)
