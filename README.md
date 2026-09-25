@@ -8,7 +8,7 @@ takes the built-in widget's place in the bar, keeping its position and settings.
 omarchy plugin add https://github.com/sbelcl/omarchy-indicators-l10n.git --enable
 ```
 
-Removing it puts the built-in back. Translated: the tooltips on the notification, night light, screen recording, stay-awake and dictation indicators.
+Removing it puts the built-in back. Translated: the tooltips on the notification, night light, screen recording, stay-awake, dictation and reminder indicators.
 
 Each indicator is loaded through its own `Loader`, so an id in the parent cannot reach it; every indicator that shows a tooltip carries its own catalog loader. Upstream loads them from `../indicators/`, a path that points outside a flat plugin folder, so this build loads them from `indicators/` — the same rewrite Omarchy's own `omarchy plugin clone` performs.
 
@@ -24,7 +24,12 @@ source of every key.
 [omarchy-language](https://github.com/sbelcl/omarchy-language) ships and
 installs the catalogs; this plugin does not require it.
 
-**Stays English:** The reminder indicator, which has no text of its own.
+**The reminder indicator** is the one whose text is not a QML literal:
+`omarchy-reminder` returns the finished tooltip (`Set Reminder`, `1 reminder`,
+`5 reminders`) alongside the count. Translating the finished sentence would
+need a key per count, so the tooltip is built from the count here instead --
+which is also what lets a language decline the noun, as Slovenian does across
+four forms.
 
 ## Why this is a fork
 
