@@ -24,6 +24,8 @@ BarIndicator {
   activeTooltipText: i18n.plural(reminderCount, "%1 reminder", "%1 reminders")
   inactiveTooltipText: i18n.t("Set Reminder")
 
+  Translations { id: i18n }
+
   function refresh() {
     if (!jsonProc.running) jsonProc.running = true
   }
@@ -35,7 +37,9 @@ BarIndicator {
   function update(raw) {
     var data = extractData(raw)
     reminderCount = Number(data.count || 0)
-    tooltip = String(data.tooltip || "")
+    tooltip = reminderCount > 0
+      ? i18n.plural(reminderCount, "%1 reminder", "%1 reminders")
+      : i18n.t("Set Reminder")
   }
 
   Component.onCompleted: refresh()
