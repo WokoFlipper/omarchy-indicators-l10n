@@ -24,8 +24,6 @@ BarIndicator {
   activeTooltipText: i18n.plural(reminderCount, "%1 reminder", "%1 reminders")
   inactiveTooltipText: i18n.t("Set Reminder")
 
-  Translations { id: i18n }
-
   function refresh() {
     if (!jsonProc.running) jsonProc.running = true
   }
